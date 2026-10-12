@@ -1,16 +1,34 @@
-const width = 400;
-const height = 400;
+// this is a simple example of a random walker
+// I have included a graph to show all the random distributions of each step taken
+
 let walker;
+let total = 8;
+let randomCounts = [];
 
 function setup() {
   createCanvas(400, 400);
-  background(220);
   walker = new Walker();
+
+  for (let i = 0; i < total; i++) {
+    randomCounts[i] = 0;
+  }
 }
 
 function draw() {
+  background(220);
   walker.show();
   walker.step();
+
+  let index = floor(random(randomCounts.length));
+  randomCounts[index]++;
+
+  stroke(0);
+  fill(127);
+  let w = width / randomCounts.length;
+
+  for (let x = 0; x < randomCounts.length; x++) {
+    rect(x * w, height - randomCounts[x], w - 1, randomCounts[x]);
+  }
 }
 
 class Walker {
@@ -26,15 +44,10 @@ class Walker {
   }
 
   step() {
-    let choice = floor(random(4));
-    if (choice === 0) {
-      this.x++;
-    } else if (choice === 1) {
-      this.x--;
-    } else if (choice === 2) {
-      this.y++;
-    } else {
-      this.y--;
-    }
+    let xstep = random(-1, 1);
+    let ystep = random(-1, 1);
+
+    this.x += xstep;
+    this.y += ystep;
   }
 }
