@@ -59,7 +59,7 @@ class Body {
         // with the distance calculate gravitational strength
         // clamp it first so bodies dont get yeeted as easily
         let d = max(dir.mag(), 15);
-        let strength = (G * other.mass) / (d * d);
+        let strength = (gSlider.value() * other.mass) / (d * d);
 
         // normalize distance and scale by strenGTH
         dir.normalize();

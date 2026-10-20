@@ -6,12 +6,15 @@ let body;
 let bodies = [];
 let numBodies = 3;
 
-// constants
-const G = 1.9;
+let gSlider;
 
 function setup() {
   createCanvas(800, 800, WEBGL);
   camera(0, -450, 550, 0, 0, 0, 0, 1, 0);
+
+  // slider for gravity
+  gSlider = createSlider(0.05, 20, 1, 0.05);
+  gSlider.position(60, 120);
 
   // set up the three bodies
   for (let i = 0; i < numBodies; i++) {
