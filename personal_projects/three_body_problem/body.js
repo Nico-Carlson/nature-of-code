@@ -2,11 +2,11 @@
 
 class Body {
   constructor() {
-    this.pos = p5.Vector.random2D();
+    this.pos = p5.Vector.random3D();
     this.pos.mult(random(200));
-    this.velocity = p5.Vector.random2D();
+    this.velocity = p5.Vector.random3D();
     this.velocity.mult(0.5);
-    this.acceleration = createVector(0, 0);
+    this.acceleration = createVector(0, 0, 0);
     this.color = random([
       [100, 10, 35],
       [200, 20, 100],
@@ -23,19 +23,27 @@ class Body {
     this.pos.add(this.velocity);
 
     this.trails.push(this.pos.copy());
-    while (this.trails.length > 250) this.trails.shift();
+    while (this.trails.length > 150) this.trails.shift();
   }
 
   show() {
-    fill(this.color);
     noStroke();
-    circle(this.pos.x, this.pos.y, this.mass);
+    fill(red(this.color), green(this.color), blue(this.color), 120);
 
+    // trail
     for (let p of this.trails) {
       push();
-      circle(p.x, p.y, 6);
+      translate(p.x, p.y, p.z);
+      sphere(3);
       pop();
     }
+
+    // body
+    fill(this.color);
+    push();
+    translate(this.pos.x, this.pos.y, this.pos.z);
+    sphere(this.mass / 2);
+    pop();
   }
 
   gravity() {
