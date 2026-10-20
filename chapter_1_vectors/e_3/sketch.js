@@ -6,7 +6,7 @@ let ball;
 let boxSize;
 
 function setup() {
-  createCanvas(640, 400, WEBGL);
+  createCanvas(800, 800, WEBGL);
 
   boxSize = width / 4;
   ball = new Ball(width, height, boxSize);
